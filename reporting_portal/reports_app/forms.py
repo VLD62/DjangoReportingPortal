@@ -2,6 +2,12 @@ from .models import Report
 from django import forms
 
 
+class DisabledFormMixin():
+    def __init__(self):
+        for (_, field) in self.fields.items():
+            field.widget.attrs['disabled'] = True
+            field.widget.attrs['readonly'] = True
+
 class ReportCreateForm(forms.ModelForm):
 
     class Meta:
@@ -24,6 +30,11 @@ class ReportCreateForm(forms.ModelForm):
             super().__init__(*args, **kws)
             self.fields['user'].initial = self.user
 
+
+class ReportDeleteForm(ReportCreateForm, DisabledFormMixin):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        DisabledFormMixin.__init__(self)
 
 class FilterForm(forms.Form):
     ORDER_ASC = 'asc'

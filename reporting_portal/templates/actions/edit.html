@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1 class="text-center">Edit Report</h1>
+    <form class="col-lg-6 offset-lg-3" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="name">Name:</label>
+            {{ form.name }}
+        </div>
+        <div class="form-group">
+            <label for="name">Category:</label>
+            {{ form.category }}
+        </div>
+        <div class="form-group">
+            <label for="short_description">Short description:</label>
+            {{ form.short_description }}
+        </div>
+        <div class="form-group">
+            <label for="report_url">Report URL:</label>
+            {{ form.report_url }}
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            {{ form.description }}
+        </div>
+        <div class="form-group">
+            <label for="added_by">Added by: </label>
+            {{ form.added_by }}
+        </div>
+        <div class="custom-file">
+            <label class="custom-file-label" for="image">Choose File</label>
+            {{ form.file }}
+        </div>
+        <input type="submit" value="Save" class="btn btn-primary mt-3">
+    </form>
+{% endblock %}
+

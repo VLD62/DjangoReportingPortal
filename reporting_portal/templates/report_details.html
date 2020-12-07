@@ -1,11 +1,13 @@
 <div class="card m-3" style="width: 18rem;">
     <div class="card-body">
-        <h5 class="card-title">{{ report.name }}</h5>
+        <h5 class="card-title"><b>{{ report.name }}</b></h5>
         <img class="card-img-top" src="/static/report.png" alt="Card image cap">
         <p class="card-text"><b>Category:</b> {{ report.category }}</p>
         <p class="card-text">{{ report.short_description }}</p>
-        <p><a href="{% url 'report details' report.id %}">Details</a></p>
-        <p><a href="{{ report.report_url }}">External URL</a></p>
-        <p><a href="{{ report.file.url }}">Download</a></p>
+        <div class="buttons-container">
+                <p><a class="btn btn-outline-primary" href="{% url 'report details' report.id %}">Details</a></p>
+                <p><a class="btn btn-outline-info" href="{{ report.report_url }}">External URL</a></p>
+                <p><a class="btn btn-outline-success" href="{{ report.file.url }}">Download</a></p>
+        </div>
     </div>
 </div>

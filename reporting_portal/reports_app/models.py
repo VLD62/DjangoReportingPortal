@@ -7,15 +7,15 @@ class Report(models.Model):
     CATEGORY_CHOICES = (
         ('ETC', 'ETC'),
         ('AEX', 'AEX'),
-        ('OTR', 'OTHER'),
+        ('OTHER', 'OTHER'),
     )
 
     name = models.CharField(max_length=25)
     short_description = models.CharField(max_length=25)
     category = models.CharField(
-        max_length=3,
+        max_length=5,
         choices=CATEGORY_CHOICES,
-        default='OTR',
+        default='OTHER',
     )
     description = models.TextField()
     report_url = models.URLField(max_length=200)

@@ -8,7 +8,7 @@ from django.views.generic import ListView, CreateView, FormView
 
 from reports_core.decorators import group_required
 from reports_core.view_mixins import GroupRequiredMixin
-from .forms import ReportCreateForm, FilterForm
+from .forms import ReportCreateForm, ReportDeleteForm, FilterForm
 from .models import Report
 
 
@@ -91,7 +91,7 @@ class IndexView(ListView):
 # @method_decorator(login_required, name='dispatch')
 class ReportCreateView(GroupRequiredMixin, LoginRequiredMixin, FormView):
     form_class = ReportCreateForm
-    template_name = 'create.html'
+    template_name = 'actions/create.html'
     success_url = reverse_lazy('index')
     #TODO: add different groups maybe?
     groups = ['User']
@@ -107,3 +107,35 @@ def report_details(request, pk):
         'report': report,
     }
     return render(request, 'details.html', context)
+
+def edit_report(request, pk):
+    report = Report.objects.get(pk=pk)
+    if request.method == 'GET':
+        context = {
+            'report': report,
+            'form': ReportCreateForm(instance=report),
+        }
+        return render(request, 'actions/edit.html', context)
+    else:
+        form = ReportCreateForm(request.POST, instance=report)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+        context = {
+            'report': report,
+            'form': form,
+        }
+        return render(request, 'actions/edit.html', context)
+
+
+def delete_report(request, pk):
+    report = Report.objects.get(pk=pk)
+    if request.method == 'GET':
+        context = {
+            'report': report,
+            'form': ReportDeleteForm(instance=report),
+        }
+        return render(request, 'actions/delete.html', context)
+    else:
+        report.delete()
+        return redirect('index')
