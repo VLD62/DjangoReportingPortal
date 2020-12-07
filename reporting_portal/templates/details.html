@@ -1,10 +1,31 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<!--    TODO: Add report details-->
-    <p class="card-text">TODO: REFACTOR REPORT DETAILS WITH MORE INFO AND STYLE</p>
-    <p class="card-text">Report details</p>
+   <h1 class="text-center">Report Details</h1>
+    <form class="col-lg-6 offset-lg-3" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="name"><b>Name:</b> {{ report.name }}</label>
+        </div>
+        <div class="form-group">
+            <label for="category"><b>Category:</b> {{ report.category }}</label>
 
-    {{ report.name }}
-    <img class="card-img-top" src="{{ report.image }}" alt="Card image cap">
+        </div>
+        <div class="form-group">
+            <label for="short_description"><b>Short description:</b> {{ report.short_description }}</label>
+        </div>
+        <div class="form-group">
+            <label for="report_url"><b>External URL:</b> {{ report.report_url }}</label>
+        </div>
+        <div class="form-group">
+            <label for="description"><b>Description:</b> {{ report.description }}</label>
+        </div>
+        <div class="form-group">
+            <label for="added_by"><b>Added by:</b> {{ report.added_by }} </label>
+        </div>
+        <div class="form-group">
+            <label for="download"><b>Download:</b> <a href="{{ report.file.url }}">Link</a> </label>
+        </div>
+        <input type="submit" value="Create" class="btn btn-primary mt-3">
+    </form>
 {% endblock %}

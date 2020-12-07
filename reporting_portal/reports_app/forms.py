@@ -9,8 +9,11 @@ class ReportCreateForm(forms.ModelForm):
         exclude = ['user']
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'category': forms.Select(attrs={'class': 'form-control'}),
+            'short_description': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'}),
-            'image': forms.FileInput(attrs={'class': 'custom-file-input'}),
+            'report_url': forms.TextInput(attrs={'class': 'form-control'}),
+            'file': forms.FileInput(attrs={'class': 'custom-file-input'}),
 
         }
         fields = '__all__'
