@@ -1,14 +1,12 @@
 {% extends 'base.html' %}
-
 {% block content %}
 <h1 class="text-center">All Reports</h1>
     <form method="get" action="{% url 'index' %}">
         {{ filter_form }}
         {% csrf_token %}
-        <button>Filter</button>
+        <button class="btn btn-primary">Search</button>
     </form>
 <div class="d-flex p-3">
-
     {% for report in reports %}
     {% include 'report_details.html' with report=report %}
     {% endfor %}

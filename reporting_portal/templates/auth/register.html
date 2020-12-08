@@ -11,7 +11,7 @@
         {% bootstrap_field field %}
         {% endfor %}
         {% buttons %}
-        <p><button class="btn btn-primary">Submit</button> or <a href="{% url 'login user' %}">Login</a></p>
+            <p><button class="btn btn-primary">Submit</button> <a class="btn btn-outline-primary" href="{% url 'login user' %}">Login</a></p>
         {% endbuttons %}
     </form>
 </div>

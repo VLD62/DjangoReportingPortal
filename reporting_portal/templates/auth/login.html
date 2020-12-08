@@ -10,7 +10,7 @@
         {% bootstrap_field field %}
         {% endfor %}
         {% buttons %}
-        <p><button class="btn btn-primary">Login</button> or <a href="{% url 'register user' %}?next={{ request.GET.next }}">Register</a></p>
+            <p><button class="btn btn-primary">Login</button> <a class="btn btn-outline-primary" href="{% url 'register user' %}?next={{ request.GET.next }}">Register</a></p>
         {% endbuttons %}
     </form>
 </div>
