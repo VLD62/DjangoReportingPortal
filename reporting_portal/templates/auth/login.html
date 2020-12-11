@@ -6,9 +6,8 @@
     <form method="POST" action="{% url 'login user' %}">
         <input type="hidden" name="return_url" value="{{ request.GET.next }}" />
         {% csrf_token %}
-        {% for field in login_form %}
-        {% bootstrap_field field %}
-        {% endfor %}
+        {{ form }}
+        <br />
         {% buttons %}
             <p><button class="btn btn-primary">Login</button> <a class="btn btn-outline-primary" href="{% url 'register user' %}?next={{ request.GET.next }}">Register</a></p>
         {% endbuttons %}
