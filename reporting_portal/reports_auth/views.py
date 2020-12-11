@@ -1,9 +1,10 @@
-from django.contrib.auth import views as auth_views
-from django.contrib.auth.decorators import login_required
 from django.db import transaction
+from django.urls import reverse_lazy
+from django.contrib.auth import login, views as auth_views
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from reports_auth.forms import RegisterForm, ProfileForm, LoginForm
+
 
 class RegisterView(TemplateView):
     template_name = 'auth/register.html'
@@ -40,7 +41,6 @@ class LoginView(auth_views.LoginView):
     template_name = 'auth/login.html'
     form_class = LoginForm
 
+
 class LogoutView(auth_views.LogoutView):
     next_page = reverse_lazy('index')
-
-

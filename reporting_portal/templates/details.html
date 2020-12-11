@@ -21,10 +21,12 @@
             <label for="added_by"><b>Added by:</b> {{ report.added_by }} </label>
         </div>
             <div class="buttons-container">
+                {% if user == report.added_by or user.is_superuser %}
                 <a class="btn btn-primary mt-0" href="{% url 'edit report' report.id %}">Edit</a>
+                <a class="btn btn-outline-danger" href="{% url 'delete report' report.id %}">Delete</a>
+                {% endif %}
                 <a class="btn btn-outline-info" href="{{ report.report_url }}">External URL</a>
                 <a class="btn btn-outline-success" href="{{ report.file.url }}">Download</a>
-                <a class="btn btn-outline-danger" href="{% url 'delete report' report.id %}">Delete</a>
             </div>
     </form>
 {% endblock %}

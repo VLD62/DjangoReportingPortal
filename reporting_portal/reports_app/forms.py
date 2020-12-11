@@ -2,17 +2,11 @@ from .models import Report
 from django import forms
 
 
-# class DisabledFormMixin():
-#     def __init__(self):
-#         for (_, field) in self.fields.items():
-#             field.widget.attrs['disabled'] = True
-#             field.widget.attrs['readonly'] = True
-
 class ReportCreateForm(forms.ModelForm):
 
     class Meta:
         model = Report
-        exclude = ['user']
+        exclude = ('added_by',)
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'category': forms.Select(attrs={'class': 'form-control'}),
@@ -22,19 +16,9 @@ class ReportCreateForm(forms.ModelForm):
             'file': forms.FileInput(attrs={'class': 'custom-file-input'}),
 
         }
-        fields = '__all__'
-
-        def __init__(self, *args, **kws):
-            # To get request.user. Do not use kwargs.pop('user', None) due to potential security hole
-            self.user = kws.pop('user')
-            super().__init__(*args, **kws)
-            self.fields['user'].initial = self.user
 
 
-# class ReportDeleteForm(ReportCreateForm, DisabledFormMixin):
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#         DisabledFormMixin.__init__(self)
+
 
 class FilterForm(forms.Form):
     ORDER_ASC = 'asc'
@@ -45,9 +29,22 @@ class FilterForm(forms.Form):
         (ORDER_DESC, 'Descending'),
     )
 
-    text = forms.CharField(
+    CATEGORY_CHOICES = (
+        ('', 'ALL'),
+        ('AEX', 'AEX'),
+        ('ETC', 'ETC'),
+        ('OTHER', 'OTHER')
+    )
+
+    title = forms.CharField(
         required=False,
     )
+
+    category = forms.ChoiceField(
+        choices=CATEGORY_CHOICES,
+        required=False,
+    )
+
     order = forms.ChoiceField(
         choices=ORDER_CHOICES,
         required=False,

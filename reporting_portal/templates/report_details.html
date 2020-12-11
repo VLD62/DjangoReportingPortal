@@ -3,6 +3,7 @@
         <h5 class="card-title"><b>{{ report.name }}</b></h5>
         <img class="card-img-top" src="/static/report.png" alt="Card image cap">
         <p class="card-text"><b>Category:</b> {{ report.category }}</p>
+        <p class="card-text"><b>Added by:</b> {{ report.added_by }}</p>
         <p class="card-text">{{ report.short_description }}</p>
         <div class="buttons-container">
                 <p><a class="btn btn-outline-primary" href="{% url 'report details' report.id %}">Details</a></p>

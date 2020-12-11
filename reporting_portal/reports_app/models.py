@@ -1,8 +1,10 @@
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.db import models
+from django.db.models.signals import pre_delete
+from django.dispatch.dispatcher import receiver
 
+UserModel = get_user_model()
 
-# Create your models here.
 class Report(models.Model):
     CATEGORY_CHOICES = (
         ('ETC', 'ETC'),
@@ -22,4 +24,9 @@ class Report(models.Model):
     file = models.FileField(
         upload_to='files',
     )
-    added_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    added_by = models.ForeignKey(UserModel, on_delete=models.CASCADE)
+
+@receiver(pre_delete, sender=Report)
+def delete_file(sender, instance, **kwargs):
+    if instance.file:
+        instance.file.delete(False)
