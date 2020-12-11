@@ -35,9 +35,3 @@ class LoginForm(BootstrapFormMixin, AuthenticationForm):
         super().__init__(*args, **kwargs)
         self.__init_fields__()
 
-
-# class LoginForm(forms.Form):
-#     username = forms.CharField()
-#     password = forms.CharField(
-#         widget = forms.PasswordInput(),
-#     )
