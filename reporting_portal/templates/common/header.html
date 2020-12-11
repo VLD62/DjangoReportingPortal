@@ -30,7 +30,7 @@
     </div>
     <div class="nav-item float-right">
         {% if user.is_authenticated %}
-            <a class="btn btn-success mt-0" href="{% url 'logout user' %}">Logged as {{ user.username }} -> Logout</a>
+            Logged as: {{ user.username }}  <a class="btn btn-success mt-0" href="{% url 'logout user' %}">Logout</a>
         {% else %}
             <a class="btn btn-primary mt-0" href="{% url 'login user' %}">Login</a>
         {% endif %}
